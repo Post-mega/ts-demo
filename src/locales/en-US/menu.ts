@@ -1,4 +1,15 @@
 export default {
+  'menu.my-online-list': 'My Online List',
+  'menu.online': 'Online List',
+  'menu.online.Lark': 'Lark',
+  'menu.online.People': 'People',
+  'menu.online.Security': 'Security',
+  'menu.online.Docs': 'Docs',
+  'menu.sheet': 'Sheet',
+  'menu.sheet.sheet-list': 'List',
+  'menu.sheet.sheet-timeline': 'Timeline',
+  'menu.manage':'Module Manage',
+
   'menu.welcome': 'Welcome',
   'menu.more-blocks': 'More Blocks',
   'menu.home': 'Home',

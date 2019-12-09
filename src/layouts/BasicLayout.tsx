@@ -9,6 +9,7 @@ import ProLayout, {
   BasicLayoutProps as ProLayoutProps,
   Settings,
   DefaultFooter,
+  SettingDrawer
 } from '@ant-design/pro-layout';
 import React, { useEffect } from 'react';
 import Link from 'umi/link';
@@ -20,21 +21,21 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
-import { isAntDesignPro, getAuthorityFromRouter } from '@/utils/utils';
+// import { isAntDesignPro, getAuthorityFromRouter } from '@/utils/utils';
 import logo from '../assets/logo.svg';
 
-const noMatch = (
-  <Result
-    status="403"
-    title="403"
-    subTitle="Sorry, you are not authorized to access this page."
-    extra={
-      <Button type="primary">
-        <Link to="/user/login">Go Login</Link>
-      </Button>
-    }
-  />
-);
+// const noMatch = (
+//   <Result
+//     status="403"
+//     title="403"
+//     subTitle="Sorry, you are not authorized to access this page."
+//     extra={
+//       <Button type="primary">
+//         <Link to="/user/login">Go Login</Link>
+//       </Button>
+//     }
+//   />
+// );
 
 export interface BasicLayoutProps extends ProLayoutProps {
   breadcrumbNameMap: {
@@ -91,27 +92,28 @@ const defaultFooterDom = (
 );
 
 const footerRender: BasicLayoutProps['footerRender'] = () => {
-  if (!isAntDesignPro()) {
-    return defaultFooterDom;
-  }
+  // if (!isAntDesignPro()) {
+  //   return defaultFooterDom;
+  // }
   return (
-    <>
-      {defaultFooterDom}
-      <div
-        style={{
-          padding: '0px 24px 24px',
-          textAlign: 'center',
-        }}
-      >
-        <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">
-          <img
-            src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
-            width="82px"
-            alt="netlify logo"
-          />
-        </a>
-      </div>
-    </>
+    defaultFooterDom
+    // <>
+    //   {defaultFooterDom}
+    //   <div
+    //     style={{
+    //       padding: '0px 24px 24px',
+    //       textAlign: 'center',
+    //     }}
+    //   >
+    //     <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">
+    //       <img
+    //         src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
+    //         width="82px"
+    //         alt="netlify logo"
+    //       />
+    //     </a>
+    //   </div>
+    // </>
   );
 };
 
@@ -140,9 +142,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     }
   };
   // get children authority
-  const authorized = getAuthorityFromRouter(props.route.routes, location.pathname || '/') || {
-    authority: undefined,
-  };
+  // const authorized = getAuthorityFromRouter(props.route.routes, location.pathname || '/') || {
+  //   authority: undefined,
+  // };
 
   return (
     <ProLayout
@@ -185,9 +187,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
       {...props}
       {...settings}
     >
-      <Authorized authority={authorized!.authority} noMatch={noMatch}>
+      {/* <Authorized authority={authorized!.authority} noMatch={noMatch}> */}
         {children}
-      </Authorized>
+      {/* </Authorized> */}
     </ProLayout>
   );
 };

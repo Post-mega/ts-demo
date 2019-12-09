@@ -1,14 +1,14 @@
 import { IConfig, IPlugin } from 'umi-types';
 import defaultSettings from './defaultSettings'; // https://umijs.org/config/
 import slash from 'slash2';
-import themePluginConfig from './themePluginConfig';
+// import themePluginConfig from './themePluginConfig';
 
 const { pwa } = defaultSettings;
 
 // preview.pro.ant.design only do not use in your production ;
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
 const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION } = process.env;
-const isAntDesignProPreview = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site';
+// const isAntDesignProPreview = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site';
 
 const plugins: IPlugin[] = [
   [
@@ -57,16 +57,16 @@ const plugins: IPlugin[] = [
   ],
 ];
 
-if (isAntDesignProPreview) {
+// if (isAntDesignProPreview) {
   // 针对 preview.pro.ant.design 的 GA 统计代码
-  plugins.push([
-    'umi-plugin-ga',
-    {
-      code: 'UA-72788897-6',
-    },
-  ]);
-  plugins.push(['umi-plugin-antd-theme', themePluginConfig]);
-}
+//   plugins.push([
+//     'umi-plugin-ga',
+//     {
+//       code: 'UA-72788897-6',
+//     },
+//   ]);
+//   plugins.push(['umi-plugin-antd-theme', themePluginConfig]);
+// }
 
 export default {
   plugins,
@@ -86,7 +86,24 @@ export default {
           component: './user/login',
         },
       ],
-    },
+    }, 
+    // 单独的一个页面，后续可以考虑对应各个业务线
+    // {
+    //   path: '/Lark',
+    //   name: "Lark"",
+    //   component: '../layouts/BasicLayout',
+    //   // icon: "area-chart",
+    //   children: [
+    //     {
+    //       "path": "list",
+    //       "name": "sheet-list"
+    //     },
+    //     {
+    //       "path": "timeline",
+    //       "name": "sheet-timeline"
+    //     }
+    //   ]
+    // },
     {
       path: '/',
       component: '../layouts/SecurityLayout',
@@ -98,20 +115,77 @@ export default {
           routes: [
             {
               path: '/',
-              redirect: '/welcome',
+              redirect: '/my-online-list',
             },
             {
-              path: '/welcome',
-              name: 'welcome',
-              icon: 'smile',
+              path: '/my-online-list',
+              name: 'my-online-list',
+              icon: 'user',
               component: './Welcome',
             },
             {
-              path: '/admin',
-              name: 'admin',
-              icon: 'crown',
-              component: './Admin',
-              authority: ['admin'],
+              path: '/online',
+              name: 'online',
+              icon: 'container',
+              routes: [
+                {
+                  path: '/online/lark',
+                  name: 'Lark',
+                  component: './Lark',
+                },
+                {
+                  path: '/online/people',
+                  name: 'People',
+                  component: './People',
+                },
+                {
+                  path: '/online/Security',
+                  name: 'Security',
+                  component: './Welcome',
+                },
+                {
+                  path: '/online/Docs',
+                  name: 'Docs',
+                  component: './Welcome',
+                },
+                {
+                  path: 'online/businessline/create',
+                  hideInMenu: true,
+                },
+                {
+                  path: '/People/createBus',
+                  hideInMenu: true,
+                },
+                {
+                  path: '/People/bus',
+                  hideInMenu: true,
+                },
+                {
+                  path: '/businessline/createFeature',
+                  hideInMenu: true,
+                },
+              ],
+            },
+            {
+              path: '/sheet',
+              name: 'sheet',
+              icon: 'area-chart',
+              routes: [
+                {
+                  path: '/sheet/list',
+                  name: 'sheet-list',
+                },
+                {
+                  path: '/sheet/timeline',
+                  name: 'sheet-timeline',
+                },
+              ],
+            },
+            {
+              path: '/manage',
+              name: 'manage',
+              icon: 'solution',
+              component: './Manage',
             },
             {
               component: './404',
@@ -123,7 +197,6 @@ export default {
         },
       ],
     },
-
     {
       component: './404',
     },
@@ -183,4 +256,13 @@ export default {
   //     pathRewrite: { '^/server': '' },
   //   },
   // },
+  proxy: {
+    '/api/v1': {
+      // 联调地址，stage环境
+      target: 'https://gatekeeper-stage.bytedance.net',
+      // 开发地址
+      // target: 'https://yapi.bytedance.net/mock/3804',
+      changeOrigin: true,
+    },
+  },
 } as IConfig;

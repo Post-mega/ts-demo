@@ -49,13 +49,13 @@ export default {
   layout: 'sidemenu',
   contentWidth: 'Fluid',
   fixedHeader: false,
-  autoHideHeader: false,
+  autoHideHeader: true,
   fixSiderbar: false,
   colorWeak: false,
   menu: {
     locale: true,
   },
-  title: 'Ant Design Pro',
+  title: 'GateKeeper',
   pwa: false,
   iconfontUrl: '',
 } as DefaultSettings;

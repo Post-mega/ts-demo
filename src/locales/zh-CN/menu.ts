@@ -1,4 +1,15 @@
 export default {
+  'menu.my-online-list': '我的上线单',
+  'menu.online': '上线单管理',
+  'menu.online.Lark': 'Lark',
+  'menu.online.People': 'People',
+  'menu.online.Security': 'Security',
+  'menu.online.Docs': 'Docs',
+  'menu.sheet': '发版一览',
+  'menu.sheet.sheet-list': '列表',
+  'menu.sheet.sheet-timeline': '时间线',
+  'menu.manage': '模块管理',
+
   'menu.welcome': '欢迎',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
